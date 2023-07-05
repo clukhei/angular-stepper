@@ -1,100 +1,65 @@
-# Angular and Sgds web components workshop
+# sgds-stepper and Angular
 
-## Web components
+This repository is an example on how to use sgds-web-component's Stepper component with Angular
 
-- History of web components?
-  In 2011, Web Components were introduced for the first time by Alex Russell at Fronteers Conference.[14]
+## Child Components
 
-In 2013, Polymer, a library based on Web Components was released by Google.[15]
+The stepper example has three steps and each step has its own component
 
-In 2017, Ionic (mobile app framework) team built StencilJS, a JavaScript compiler that generates Web Components.[16]
+Step 1: PersonalDetailsComponent
+Step 2: AddressComponent
+Step 3: ReviewComponent
 
-In 2018, Angular 6 introduced Angular Elements that lets you package your Angular components as custom web elements, which are part of the web components set of web platform APIs.
+The first step is to build your components individually. These three components will be the direct child of StepperComponent
 
-In 2018, Firefox 63 enabled Web Components support by default and updated the developer tools to support them.[17]
+## Parent Component
 
-In 2018, Lit Element was developed by the Google Chrome team as part of larger Polymer project. Lit Element was designed to be a lightweight and easy-to-use framework for
-creating web components.
+The parent component here is StepperComponent. This is where all the state will be managed and should persist. This component should capture and store any user input.
+In this application example, StepperComponents holds the state `details`
 
-In 2020: Chromium Microsoft Edge
-https://caniuse.com/?search=web%20components
-
-- What defines a Web component
-
-1. Custom elements
-   - Custom Elements. Quite simply, these are fully-valid HTML elements with custom templates, behaviors and tag names (e.g. <one-dialog>) made with a set of JavaScript APIs. Custom Elements are defined in the HTML Living Standard specification.
-2. Shadow DOM
-   - encapsulation for both markup and styles.
-3. HTML templates
-
-Demo on Shadow Dom and Light Dom
-
-- Cannot query elements in the shadowdom: document.querySelector("div[variant=card-action]")
-- Can query elements in the light dom: document.querySelector("span[slot=card-subtitle]")
-- Can query elements if you use shadow dom api : document.querySelector("sgds-action-card[type=radio]").shadowRoot.querySelector("div[variant=card-action]")
-
-- Can style light doms
-
-  ```css
-  span[slot="card-subtitle"] {
-    color: red;
-  }
-  ```
-
-- Cannot style shadow doms
-
-```css
-p.card-text {
-  color: red;
+```js
+interface IDetails {
+  firstName: string;
+  lastName: string;
+  address: string;
 }
 ```
 
-# Content projection : <slot></slot> vs <ng-content>
+## Dynamically rendering of child components
 
-## Angular
+Whenever the step changes, the view of the components is expected to change.
+Use [angular's dynamic component](https://angular.io/guide/dynamic-component-loader) loader to do that in the parent i.e. StepperComponent
 
+Setup the stepper's metadata and it into sgds-stepper's step prop.
+
+```jsx
+//stepper.component.ts
+stepMetadata: StepperItem[] = [
+    {
+      stepHeader: 'Personal Details',
+      component: PersonalDetailsComponent,
+    },
+    {
+      stepHeader: 'Address and Contact Information',
+      component: AddressComponent,
+    },
+    {
+      stepHeader: 'Review',
+      component: ReviewComponent,
+    },
+  ];
+  ...
+```
 ```html
-<h2>Multi-slot content projection</h2>
-
-Default:
-<ng-content></ng-content>
-
-Question:
-<ng-content select="[question]"></ng-content>
-`
+//stepper.component.html
+<sgds-stepper [steps]="stepMetadata"></sgds-stepper>
 ```
 
-Usage:
+## Parent listens to child event emitter
 
-```html
-<app-zippy-multislot>
-  <p question>Is content projection cool?</p>
-  <p>Let's learn about content projection!</p>
-</app-zippy-multislot>
-```
+To obtain user input data from child. You need to setup event emitters in your child and listen it from the parent component. See [Angular's Input and Output](https://angular.io/guide/inputs-outputs)
 
-## Web components
+See personal-details.component.ts or address-details.component.ts file for example 
 
-```html
-<sgds-button>
-  <slot></slot>
-  <slot name="icon"></slot>
-</sgds-button>
-```
+From parent, listen to the event emission and subscribe to it to obtain the emitted value. Store the updated data inside the parent component.
 
-Usage:
-
-```html
-<sgds-button> Hello <span slot="icon">mock icon</span></sgds-button>
-```
-
-
-# Events 
-
-# Attribute binding
-
-# Styling 
-
-# Form 
-
-# 
