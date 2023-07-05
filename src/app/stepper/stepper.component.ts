@@ -41,7 +41,7 @@ export class StepperComponent {
       component: ReviewComponent,
     },
   ];
-  @Input() activeStep: number = 0;
+  activeStep: number = 0;
   @ViewChild(StepperDirective, { static: true })
   stepperComponentHost!: StepperDirective;
 
