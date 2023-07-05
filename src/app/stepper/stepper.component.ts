@@ -20,11 +20,11 @@ export interface IDetails extends IPersonalDetails {
   address: '';
 }
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'stepper-component',
+  templateUrl: './stepper.component.html',
+  styleUrls: ['./stepper.component.css'],
 })
-export class HomeComponent {
+export class StepperComponent {
   @ViewChild('stepper')
   stepper?: ElementRef<SgdsStepper>;
   stepMetadata: StepperItem[] = [

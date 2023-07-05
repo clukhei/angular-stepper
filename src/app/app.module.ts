@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import 'clk-web-components';
-import { HomeComponent } from './home/home.component';
+import { StepperComponent } from './stepper/stepper.component';
 import { AddressComponent } from './address/address.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { ReviewComponent } from './review/review.component'
@@ -13,7 +13,7 @@ import { StepperDirective } from './stepper.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    StepperComponent,
     AddressComponent,
     PersonalDetailsComponent,
     ReviewComponent,

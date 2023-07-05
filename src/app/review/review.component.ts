@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IDetails } from '../home/home.component';
+import { IDetails } from '../stepper/stepper.component';
 
 @Component({
   selector: 'review-component',
