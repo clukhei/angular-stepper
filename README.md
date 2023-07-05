@@ -63,3 +63,7 @@ See personal-details.component.ts or address-details.component.ts file for examp
 
 From parent, listen to the event emission and subscribe to it to obtain the emitted value. Store the updated data inside the parent component.
 
+
+## Stackblitz example 
+
+See this working example on stackblitz: https://stackblitz.com/github/clukhei/angular-stepper
