@@ -1,0 +1,12 @@
+<div class="container">
+    <form>
+        <sgds-input (sgds-input)="handleInputChange($event)" type="text"
+            [value]="details.firstName" label="First Name" hinttext="Enter your first name" name="firstName"
+            placeholder="Placeholder">
+        </sgds-input>
+        <sgds-input (sgds-input)="handleInputChange($event)" type="text"
+            [value]="details.lastName" label="Last Name" hinttext="Enter your last name" name="lastName"
+            placeholder="Placeholder">
+        </sgds-input>
+    </form>
+</div>

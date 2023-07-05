@@ -1,0 +1,55 @@
+main {
+  padding: 1rem;
+  grid-area: main;
+}
+
+.grid {
+  display: grid;
+  grid-template-areas:
+    "masthead masthead masthead "
+    "nav nav nav "
+    "sidenav main main "
+    "footer footer footer ";
+  grid-template-columns: 240px repeat(2, 1fr);
+  width: 100%;
+}
+
+sgds-sidenav {
+  grid-area: sidenav;
+}
+
+sgds-mainnav {
+  grid-area: nav;
+}
+
+sgds-footer {
+  grid-area: footer;
+}
+
+/* add css parts example*/
+
+
+/* add css custom properties */
+
+
+/* styling the light dom?? */
+
+sgds-mainnav-item {
+  background-color: wheat;
+}
+
+/* css parts e.g */
+sgds-footer::part(footer-bottom) {
+    background-color: grey;
+    font-family:'Times New Roman', Times, serif;
+    border: 10px dotted red
+}
+
+/* css custom properties e.g. */
+/* sgds-masthead {
+    --masthead-text-color : pink;
+} */
+
+sgds-sidenav {
+  --sidenav-theme-color	: pink;
+}
