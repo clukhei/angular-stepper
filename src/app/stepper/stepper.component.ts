@@ -1,20 +1,13 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  SimpleChange,
-  Type,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { SgdsStepper } from 'clk-web-components';
-import {
-  PersonalDetailsComponent,
-  IPersonalDetails,
-} from '../personal-details/personal-details.component';
-import { StepperDirective } from '../stepper.directive';
-import { StepperItem } from '../stepper-item';
 import { AddressComponent } from '../address/address.component';
+import {
+  IPersonalDetails,
+  PersonalDetailsComponent,
+} from '../personal-details/personal-details.component';
 import { ReviewComponent } from '../review/review.component';
+import { StepperItem } from '../stepper-item';
+import { StepperDirective } from '../stepper.directive';
 
 export interface IDetails extends IPersonalDetails {
   address: '';
@@ -24,7 +17,7 @@ export interface IDetails extends IPersonalDetails {
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.css'],
 })
-export class StepperComponent {
+export class StepperComponent implements AfterViewInit {
   @ViewChild('stepper')
   stepper?: ElementRef<SgdsStepper>;
   stepMetadata: StepperItem[] = [
@@ -45,9 +38,12 @@ export class StepperComponent {
   @ViewChild(StepperDirective, { static: true })
   stepperComponentHost!: StepperDirective;
 
-  ngOnInit(): void {
-    this.loadComponent();
+  ngAfterViewInit() {
+    // after stepper is set
+    const componentRef = this.loadComponent();
+    componentRef.changeDetectorRef.detectChanges();
   }
+
   details: IDetails = {
     firstName: '',
     lastName: '',
@@ -55,13 +51,12 @@ export class StepperComponent {
   };
 
   loadComponent() {
-    const stepComponent = this.stepMetadata[this.activeStep];
+    const stepComponent = this.stepper?.nativeElement.getComponent();
     const viewContainerRef = this.stepperComponentHost.viewContainerRef;
     viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent(
-      stepComponent.component
-    );
+    const componentRef = viewContainerRef.createComponent(stepComponent);
+
     const component = componentRef.instance as
       | PersonalDetailsComponent
       | AddressComponent;
@@ -69,14 +64,13 @@ export class StepperComponent {
       (e) => (this.details = { ...this.details, ...e })
     );
     component.details = this.details;
+    return componentRef;
   }
   loadReviewComponent() {
-    const stepComponent = this.stepMetadata[this.stepMetadata.length - 1];
+    const stepComponent = this.stepper?.nativeElement.getComponent();
     const viewContainerRef = this.stepperComponentHost.viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent(
-      stepComponent.component
-    );
+    const componentRef = viewContainerRef.createComponent(stepComponent);
     const component = componentRef.instance as ReviewComponent;
     component.finalDetails = this.details;
   }
@@ -96,6 +90,12 @@ export class StepperComponent {
   }
   reset() {
     this.stepper?.nativeElement.reset();
+    this.details = {
+      firstName: '',
+      lastName: '',
+      address: '',
+    };
+
     this.updateActiveStep();
   }
   lastStep() {
