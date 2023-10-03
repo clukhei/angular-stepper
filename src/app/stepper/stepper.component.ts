@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { SgdsStepper } from 'clk-web-components';
+import { AfterViewInit, Component, ElementRef, Type, ViewChild } from '@angular/core';
+import { SgdsStepper } from '@govtechsg/sgds-web-component/components';
 import { AddressComponent } from '../address/address.component';
 import {
   IPersonalDetails,
@@ -51,7 +51,7 @@ export class StepperComponent implements AfterViewInit {
   };
 
   loadComponent() {
-    const stepComponent = this.stepper?.nativeElement.getComponent();
+    const stepComponent = this.stepper?.nativeElement.getComponent() as Type<unknown>;
     const viewContainerRef = this.stepperComponentHost.viewContainerRef;
     viewContainerRef.clear();
 
@@ -67,7 +67,7 @@ export class StepperComponent implements AfterViewInit {
     return componentRef;
   }
   loadReviewComponent() {
-    const stepComponent = this.stepper?.nativeElement.getComponent();
+    const stepComponent = this.stepper?.nativeElement.getComponent() as Type<unknown>;
     const viewContainerRef = this.stepperComponentHost.viewContainerRef;
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent(stepComponent);

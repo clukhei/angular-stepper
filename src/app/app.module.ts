@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import 'clk-web-components';
+import '@govtechsg/sgds-web-component';
 import { StepperComponent } from './stepper/stepper.component';
 import { AddressComponent } from './address/address.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
