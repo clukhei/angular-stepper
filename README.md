@@ -12,7 +12,7 @@ Step 3: ReviewComponent
 
 The first step is to build your components individually. These three components will be the direct child of StepperComponent
 
-## Parent Component
+## Parent Components
 
 The parent component here is StepperComponent. This is where all the state will be managed and should persist. This component should capture and store any user input.
 In this application example, StepperComponents holds the state `details`
