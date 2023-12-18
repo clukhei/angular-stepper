@@ -26,6 +26,7 @@
     "lit-element": "^3.3.3",
     "lit-html": "^2.8.0",
     "rxjs": "~7.8.0",
+    "tslib": "^2.6.2",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
